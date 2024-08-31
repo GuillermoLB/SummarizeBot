@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+import os
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_core.runnables import RunnableSequence
@@ -5,7 +7,13 @@ from langchain_core.output_parsers import StrOutputParser
 
 def generate_summary(article_content):
     prompt = PromptTemplate(input_variables=["text"], template="Summarize the following article:\n\n{text}")
-    llm = ChatOpenAI(model_name="gpt-4")
+    load_dotenv()
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+
+    if not openai_api_key:
+        raise ValueError("Missing OPENAI_API_KEY environment variable")
+
+    llm = ChatOpenAI(model_name="gpt-4", api_key=openai_api_key)
     
     # Use a RunnableSequence by chaining the prompt and llm directly
     sequence = prompt | llm
