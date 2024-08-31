@@ -20,6 +20,9 @@ COPY . /app/
 # Set up ChromeDriver using webdriver-manager
 RUN pip install webdriver-manager
 
+# Set the PYTHONPATH environment variable for testing
+ENV PYTHONPATH=/app
+
 # Create a non-root user and switch to it
 RUN useradd -m myuser
 USER myuser
