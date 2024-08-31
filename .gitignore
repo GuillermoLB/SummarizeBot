@@ -1,0 +1,41 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv/
+.env/
+env.bak/
+env_old/
+
+# VSCode settings
+.vscode/
+
+# Docker settings (if local and not shared)
+docker/
+
+# Local environment variables
+.env
+
+# Editor backups and other clutter
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+*.orig
+
+# Python Package files
+*.egg-info/
+*.egg
+
+# Python pip file
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Coverage reports
+.coverage

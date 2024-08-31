@@ -1,0 +1,43 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SummarizeBot</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SummarizeBot</h1>
+        <form id="summarizeForm">
+            <label for="urlInput">Enter Article URL:</label>
+            <input type="text" id="urlInput" name="url" placeholder="https://example.com/article" required>
+            <button type="submit">Summarize</button>
+        </form>
+        <div id="summaryResult" class="result">
+            <!-- The summary will be displayed here -->
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('summarizeForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const url = document.getElementById('urlInput').value;
+            const response = await fetch('/summarize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: url })
+            });
+            const data = await response.json();
+            document.getElementById('summaryResult').innerHTML = `
+                <h2>Summary</h2>
+                <h3>${data.title}</h3>
+                <p>${data.summary}</p>
+            `;
+        });
+    </script>
+</body>
+</html>
